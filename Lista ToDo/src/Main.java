@@ -1,12 +1,14 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+
 import java.util.ArrayList;
 
 public class Main {
+
+    static ArrayList listasCriadas = new ArrayList();
+
     public static void main(String[] args) throws Exception {
 
         int opcao = 0;
-        ArrayList listasCriadas = new ArrayList();
 
         do {
             try {
@@ -23,7 +25,7 @@ public class Main {
             switch (opcao){
 
                 case 1:
-                    CriarListaNova();
+                    criarListaNova();
                     break;
                 case 2:
                     System.out.println("2");
@@ -32,7 +34,10 @@ public class Main {
                     System.out.println("3");
                     break;
                 case 4:
-                    System.out.println("4");
+                    for (int i = 0; i < listasCriadas.size(); i++){
+                        CriarListas conta = (CriarListas) listasCriadas.get(i);
+                        System.out.println(conta.nomeDaLista);
+                    }
                     break;
                 default:
                     break;
@@ -41,12 +46,18 @@ public class Main {
 
             if (opcao == 9) break;
         }while(true);
+    }
 
+    public static void criarListaNova() {
 
+        System.out.print("Digite o nome da sua nova lista:");
+        String nome = Teclado.getUmString();
+        System.out.println("\nDigite a descrição da sua nova lista:");
+        String descricao = Teclado.getUmString();
 
-    public static void CriarListaNova() {
-        System.out.println("Teste");
-        }
+        CriarListas novaLista = new CriarListas(nome,descricao);
+        listasCriadas.add(novaLista);
+        System.out.println("Lista criada com sucesso");
 
 
     }
