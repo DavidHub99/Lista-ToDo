@@ -20,6 +20,7 @@ public class Main {
 
             } catch (Exception erro) {
                 System.out.println("Digite somente os números listados\n");
+                continue;
             }
 
             switch (opcao){
@@ -28,16 +29,13 @@ public class Main {
                     criarListaNova();
                     break;
                 case 2:
-                    System.out.println("2");
+                    removerLista();
                     break;
                 case 3:
                     System.out.println("3");
                     break;
                 case 4:
-                    for (int i = 0; i < listasCriadas.size(); i++){
-                        CriarListas conta = (CriarListas) listasCriadas.get(i);
-                        System.out.println(conta.nomeDaLista);
-                    }
+                    mostrarLista();
                     break;
                 default:
                     break;
@@ -50,15 +48,47 @@ public class Main {
 
     public static void criarListaNova() {
 
-        System.out.print("Digite o nome da sua nova lista:");
+        System.out.print("\nDigite o nome da sua nova lista:");
         String nome = Teclado.getUmString();
-        System.out.println("\nDigite a descrição da sua nova lista:");
+        System.out.print("Digite a descrição da sua nova lista:");
         String descricao = Teclado.getUmString();
 
         CriarListas novaLista = new CriarListas(nome,descricao);
         listasCriadas.add(novaLista);
-        System.out.println("Lista criada com sucesso");
+        System.out.println("\nLista criada com sucesso \n");
+    }
 
+    public static boolean mostrarLista(){
+        if (listasCriadas.size() == 0){
+            System.out.println("\nVocê ainda não possui nenhuma lista criada\n");
+            return true;
+        }
+        else {
+            System.out.println();
+            for (int i = 0; i < listasCriadas.size(); i++) {
+                CriarListas conta = (CriarListas) listasCriadas.get(i);
+                System.out.println(i + 1 + " - " + conta.nomeDaLista);
+            }
+            System.out.println();
+        }
+        return false;
+    }
 
+    public static void removerLista() throws Exception {
+
+        while(true) {
+            if (mostrarLista()) return;
+
+            try {
+                System.out.print("Digite o número da lista que deseja remover:");
+                int indexRemover = Teclado.getUmInt();
+                listasCriadas.remove(1 - indexRemover);
+                System.out.println("Lista " + indexRemover + " removida com sucesso\n");
+                break;
+
+            } catch (Exception erro) {
+                System.out.println("Digite somente os números listados\n");
+            }
+        }
     }
 }
