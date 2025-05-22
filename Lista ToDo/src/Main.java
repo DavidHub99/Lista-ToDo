@@ -14,7 +14,7 @@ public class Main {
             try {
 
                 System.out.println("Lista ToDo");
-                System.out.print("Escolha umas das opções: \n1 - Criar Lista \n2 - Deletar Lista \n3 - Editar lista \n4 - Mostrar lista \n9- Sair \n\nOpção:");
+                System.out.print("Escolha umas das opções: \n1 - Criar Lista \n2 - Deletar Lista \n3 - Editar lista \n4 - Mostrar listas \n9- Sair \n\nOpção:");
                 opcao = Teclado.getUmInt();
 
 
@@ -32,7 +32,7 @@ public class Main {
                     removerLista();
                     break;
                 case 3:
-                    System.out.println("3");
+                    editarLista();
                     break;
                 case 4:
                     mostrarLista();
@@ -88,6 +88,25 @@ public class Main {
 
             } catch (Exception erro) {
                 System.out.println("Digite somente os números listados\n");
+            }
+        }
+    }
+
+    public static void editarLista() throws Exception{
+
+
+        while (true) {
+            if(mostrarLista()) return;
+
+            try {
+                System.out.println("Digite em qual lista deseja manipular:");
+                int listaParaEditar = Teclado.getUmInt();
+                CriarItem.opcoesDeManipulacao(((CriarListas) listasCriadas.get(listaParaEditar - 1)).nomeDaLista, listaParaEditar);
+                
+
+
+            }catch(Exception erro){
+                System.out.println("Digite somente os números listados");
             }
         }
     }

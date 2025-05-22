@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 
 public class CriarListas {
     String nomeDaLista;
     String descricaoDaLista;
+    ArrayList listas = new ArrayList();
 
 
 
