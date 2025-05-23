@@ -25,20 +25,11 @@ public class Main {
 
             switch (opcao){
 
-                case 1:
-                    criarListaNova();
-                    break;
-                case 2:
-                    removerLista();
-                    break;
-                case 3:
-                    editarLista();
-                    break;
-                case 4:
-                    mostrarLista();
-                    break;
-                default:
-                    break;
+                case 1: criarListaNova(); break;
+                case 2: removerLista(); break;
+                case 3: editarLista(); break;
+                case 4: mostrarLista(); break;
+                default: break;
 
             }
 
@@ -94,20 +85,77 @@ public class Main {
 
     public static void editarLista() throws Exception{
 
-
+        int listaParaEditar;
         while (true) {
-            if(mostrarLista()) return;
+            if (mostrarLista()) return;
 
             try {
-                System.out.println("Digite em qual lista deseja manipular:");
-                int listaParaEditar = Teclado.getUmInt();
-                CriarItem.opcoesDeManipulacao(((CriarListas) listasCriadas.get(listaParaEditar - 1)).nomeDaLista, listaParaEditar);
-                
-
-
-            }catch(Exception erro){
+                System.out.print("Digite em qual lista deseja manipular:");
+                listaParaEditar = Teclado.getUmInt();
+            } catch (Exception erro) {
                 System.out.println("Digite somente os números listados");
+                continue;
+            }
+            if (listaParaEditar > listasCriadas.size() || listaParaEditar < 0 || listaParaEditar == 0){
+                System.out.println("Digite somente os números listados");
+                continue;
+            }else{
+                break;
+            }
+
+
+        }
+        CriarListas lista = ((CriarListas) listasCriadas.get(listaParaEditar - 1));
+        while (true) {
+            opcoesDeManipulacao(lista.nomeDaLista, listaParaEditar);
+            int opcao = Teclado.getUmInt();
+
+            switch (opcao) {
+                case 1: adicionarItemLista(lista); break;
+                case 2: System.out.println("2"); break;
+                case 3: System.out.println("3"); break;
+                case 4: System.out.println("4"); break;
+                case 5: mostrarTodaLista(lista); break;
+                case 9: return;
+                default: break;
             }
         }
     }
+
+    public static void opcoesDeManipulacao(String nomeLista, int numeroLista){
+        System.out.println("\nLista "+nomeLista+"("+numeroLista+")");
+        System.out.println("1 - Adicionar item a lista");
+        System.out.println("2 - Apagar item da lista");
+        System.out.println("3 - Riscar item da lista");
+        System.out.println("4 - Limpar lista");
+        System.out.println("5 - Mostrar toda a lista");
+        System.out.println("\n9 - Voltar");
+        System.out.print("\n\nOpção:");
+    }
+
+    public static void adicionarItemLista(CriarListas lista){
+
+        System.out.print("Digite o dado que deseja adicionar na lista: ");
+        String tarefa = Teclado.getUmString();
+
+        CriarItem item = new CriarItem(tarefa, false);
+        lista.adicionarItemLista(item);
+    }
+
+    public static void mostrarTodaLista(CriarListas lista){
+        lista.mostrarLista(lista);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
