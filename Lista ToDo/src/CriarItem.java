@@ -8,6 +8,8 @@ public class CriarItem {
         this.status = status;
     }
 
-
+    public void setAlterarStatus(){
+        this.status = true;
+    }
 
 }

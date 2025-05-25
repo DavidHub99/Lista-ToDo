@@ -113,8 +113,8 @@ public class Main {
             switch (opcao) {
                 case 1: adicionarItemLista(lista); break;
                 case 2: apagarItemLista(lista); break;
-                case 3: System.out.println("3"); break;
-                case 4: System.out.println("4"); break;
+                case 3: alterarStatus(lista); break;
+                case 4: limparLista(lista); break;
                 case 5: mostrarTodaLista(lista); break;
                 case 9: return;
                 default: break;
@@ -140,29 +140,15 @@ public class Main {
         String tarefa = Teclado.getUmString();
 
         CriarItem item = new CriarItem(tarefa, false);
-        lista.adicionarItemLista(item);
+        lista.setAdicionarItemLista(item);
     }
 
     public static void apagarItemLista(CriarListas lista) throws Exception {
 
-        int valorIndexParaRetirar = -1;
-        while(true){
-            try{
-                if(mostrarTodaLista(lista)) return;
-                System.out.print("\nDigite o valor do item que deseja retirar:");
-                valorIndexParaRetirar = Teclado.getUmInt();
-            }catch (Exception erro){
-                System.out.println("Digite somente os números listados");
-                continue;
-            }
-            if(valorIndexParaRetirar < 0 || valorIndexParaRetirar + 1 > lista.listas.size()){
-                System.out.println("Digite somente os números listados");
-                continue;
-            }
-            else break;
-        }
+        int valorIndexParaRetirar = encontrarIndex(lista, "\nDigite o valor do item que deseja retirar:");
+        if (valorIndexParaRetirar == -1) return;
 
-        lista.apagarItemLista(valorIndexParaRetirar);
+        lista.setApagarItemLista(valorIndexParaRetirar);
 
     }
 
@@ -172,21 +158,42 @@ public class Main {
             return true;
         }
         else{
-            lista.mostrarLista(lista);
+            lista.getMostrarLista(lista);
             return false;
         }
     }
+
+    public static void alterarStatus(CriarListas lista){
+
+        int valorIndexParaRiscar = encontrarIndex(lista, "\nDigite o valor do item que deseja riscar:");
+        if( valorIndexParaRiscar == -1) return;
+
+        lista.alterarStatus(valorIndexParaRiscar);
+    }
+
+    public static void limparLista(CriarListas lista){
+        lista.setLiparLista();
+        System.out.println("Lista "+ lista.nomeDaLista+" limpa com sucesso");
+    }
+
+    public static int encontrarIndex(CriarListas lista, String texto){
+
+        int valorIndex = -1;
+        while(true){
+            try{
+                if(mostrarTodaLista(lista)) return -1;
+                System.out.print(texto);
+                valorIndex = Teclado.getUmInt();
+            }catch (Exception erro){
+                System.out.println("Digite somente os números listados");
+                continue;
+            }
+            if(valorIndex < 0 || valorIndex + 1 > lista.listas.size()){
+                System.out.println("Digite somente os números listados");
+                continue;
+            }
+            else return valorIndex;
+        }
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

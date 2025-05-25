@@ -12,18 +12,18 @@ public class CriarListas {
         this.descricaoDaLista = descricao;
     }
 
-    public void adicionarItemLista(CriarItem item){
+    public void setAdicionarItemLista(CriarItem item){
         listas.add(item);
         System.out.println("Item adiciona com sucesso");
     }
 
-    public void apagarItemLista(int indexRetirar){
+    public void setApagarItemLista(int indexRetirar){
         CriarItem item = (CriarItem) listas.get(indexRetirar );
         listas.remove(indexRetirar);
         System.out.println("Item '"+item.tarefa+"' retirado com sucesso");
     }
 
-    public void mostrarLista(CriarListas lista){
+    public void getMostrarLista(CriarListas lista){
 
             System.out.println("\nLista "+this.nomeDaLista);
         for( int i = 0; i < listas.size(); i++){
@@ -32,5 +32,14 @@ public class CriarListas {
         }
     }
 
+    public void alterarStatus(int index){
+        CriarItem item = (CriarItem) listas.get(index);
+        item.setAlterarStatus();
+        System.out.println("Item riscado da lista com sucesso");
+    }
+
+    public void setLiparLista(){
+        listas.clear();
+    }
 
 }
