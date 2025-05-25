@@ -112,7 +112,7 @@ public class Main {
 
             switch (opcao) {
                 case 1: adicionarItemLista(lista); break;
-                case 2: System.out.println("2"); break;
+                case 2: apagarItemLista(lista); break;
                 case 3: System.out.println("3"); break;
                 case 4: System.out.println("4"); break;
                 case 5: mostrarTodaLista(lista); break;
@@ -131,19 +131,50 @@ public class Main {
         System.out.println("5 - Mostrar toda a lista");
         System.out.println("\n9 - Voltar");
         System.out.print("\n\nOpção:");
+        // Destalhes da Lista
     }
 
     public static void adicionarItemLista(CriarListas lista){
 
-        System.out.print("Digite o dado que deseja adicionar na lista: ");
+        System.out.print("Digite o dado que deseja adicionar na lista:");
         String tarefa = Teclado.getUmString();
 
         CriarItem item = new CriarItem(tarefa, false);
         lista.adicionarItemLista(item);
     }
 
-    public static void mostrarTodaLista(CriarListas lista){
-        lista.mostrarLista(lista);
+    public static void apagarItemLista(CriarListas lista) throws Exception {
+
+        int valorIndexParaRetirar = -1;
+        while(true){
+            try{
+                if(mostrarTodaLista(lista)) return;
+                System.out.print("\nDigite o valor do item que deseja retirar:");
+                valorIndexParaRetirar = Teclado.getUmInt();
+            }catch (Exception erro){
+                System.out.println("Digite somente os números listados");
+                continue;
+            }
+            if(valorIndexParaRetirar < 0 || valorIndexParaRetirar + 1 > lista.listas.size()){
+                System.out.println("Digite somente os números listados");
+                continue;
+            }
+            else break;
+        }
+
+        lista.apagarItemLista(valorIndexParaRetirar);
+
+    }
+
+    public static boolean mostrarTodaLista(CriarListas lista){
+        if (lista.listas.size() == 0){
+            System.out.println("Lista vazia");
+            return true;
+        }
+        else{
+            lista.mostrarLista(lista);
+            return false;
+        }
     }
 }
 

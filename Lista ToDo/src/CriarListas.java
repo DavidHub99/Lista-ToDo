@@ -17,6 +17,12 @@ public class CriarListas {
         System.out.println("Item adiciona com sucesso");
     }
 
+    public void apagarItemLista(int indexRetirar){
+        CriarItem item = (CriarItem) listas.get(indexRetirar );
+        listas.remove(indexRetirar);
+        System.out.println("Item '"+item.tarefa+"' retirado com sucesso");
+    }
+
     public void mostrarLista(CriarListas lista){
 
             System.out.println("\nLista "+this.nomeDaLista);
@@ -25,4 +31,6 @@ public class CriarListas {
             System.out.println("Item "+ i +" - "+item.tarefa+"  Status:"+(item.status? "Feito" : "Pendente"));
         }
     }
+
+
 }
