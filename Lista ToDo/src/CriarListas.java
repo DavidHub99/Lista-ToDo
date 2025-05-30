@@ -25,7 +25,8 @@ public class CriarListas {
 
     public void getMostrarLista(CriarListas lista){
 
-            System.out.println("\nLista "+this.nomeDaLista);
+        System.out.println("\nLista "+this.nomeDaLista);
+        System.out.println("Descrição:"+lista.descricaoDaLista+"\n");
         for( int i = 0; i < listas.size(); i++){
             CriarItem item = (CriarItem) listas.get(i);
             System.out.println("Item "+ i +" - "+item.tarefa+"  Status:"+(item.status? "Feito" : "Pendente"));

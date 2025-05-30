@@ -107,8 +107,14 @@ public class Main {
         }
         CriarListas lista = ((CriarListas) listasCriadas.get(listaParaEditar - 1));
         while (true) {
-            opcoesDeManipulacao(lista.nomeDaLista, listaParaEditar);
-            int opcao = Teclado.getUmInt();
+            int opcao = 0;
+            try{
+                opcoesDeManipulacao(lista.nomeDaLista, listaParaEditar);
+                opcao = Teclado.getUmInt();
+            }catch (Exception erro){
+                System.out.println("Digite somente os números listados");
+                continue;
+            }
 
             switch (opcao) {
                 case 1: adicionarItemLista(lista); break;
